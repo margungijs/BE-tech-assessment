@@ -29,19 +29,11 @@ It provides endpoints to shorten URLs and redirect short links to the original U
 git clone https://github.com/margungijs/BE-tech-assessment.git
 cd BE-tech-assessment
 ```
-### 2. Create environment file
-```bash
-cp .env.example .env
-```
-### 3. Start containers
+### 2. Start containers
 ```bash
 docker compose up -d --build
 ```
-### 4. Generate Laravel app key
-```bash
-docker compose exec app php artisan key:generate
-```
-### 5. Run migrations
+### 3. Run migrations
 ```bash
 docker compose exec app php artisan migrate
 ```
@@ -52,7 +44,7 @@ docker compose exec app php artisan migrate
 
 ### 1. Shorten URL
 ```http request
-POST /shorten
+POST /api/shorten
 Content-Type: application/json
 ```
 #### Request body
@@ -78,7 +70,7 @@ GET /{shortKey}
 ## Testing with cURL
 ```bash
 # Shorten a URL
-curl -X POST http://localhost:8000/shorten \
+curl -X POST http://localhost:8000/api/shorten \
      -H "Content-Type: application/json" \
      -d '{"url":"https://example.com/long/url"}'
 ```
@@ -94,14 +86,14 @@ APP_DEBUG=true
 APP_URL=http://localhost:8000
 
 DB_CONNECTION=mysql
-DB_HOST=db <-- make sure this is db
+DB_HOST=db
 DB_PORT=3306
 DB_DATABASE=assessment
 DB_USERNAME=root
-DB_PASSWORD=root <-- make sure this is not empty
+DB_PASSWORD=root
 
 CACHE_DRIVER=redis
-REDIS_HOST=redis <-- make sure this is redis
+REDIS_HOST=redis
 REDIS_PORT=6379
 REDIS_PASSWORD=null
 ```
