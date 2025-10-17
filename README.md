@@ -32,6 +32,9 @@ cd BE-tech-assessment
 ### 2. Start containers
 ```bash
 docker compose up -d --build
+
+⚠️ Note: The build may occasionally fail due to temporary network issues (e.g., fetching images or PHP packages).
+If this happens, simply rerun the build command.
 ```
 ### 3. Run migrations
 ```bash
