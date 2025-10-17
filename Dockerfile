@@ -17,8 +17,14 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 RUN pecl install redis \
     && docker-php-ext-enable redis
 
+COPY composer.json composer.lock ./
+
+RUN composer install --no-dev --optimize-autoloader --no-scripts
+
 COPY . .
 
-RUN composer install
+COPY .env.example .env
+
+RUN composer run-script post-autoload-dump
 
 EXPOSE 8000
